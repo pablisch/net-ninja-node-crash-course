@@ -1,0 +1,23 @@
+{
+  "name": "net-ninja-node-crash-course",
+  "version": "1.0.0",
+  "description": "A simple [Node.js crash course](https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=RDCMUCW5YeuERMmlnqo4oq8vwUpg&start_radio=1&rv=zb3Qk8SG5Ms&t=5) from The Net Ninja",
+  "main": "files.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "lodash": "^4.17.21"
+  }
+}
