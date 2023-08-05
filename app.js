@@ -1,7 +1,12 @@
 const express = require('express');
+const morgan = require('morgan');
+
 
 // express app
 const app = express();
+
+// connect to mongodb & listen for requests
+const dbURI = 'mongodb+srv://<username>:<password>@cluster0.b9ekjnc.mongodb.net/?retryWrites=true&w=majority';
 
 // register view engine
 app.set('view engine', 'ejs');
@@ -9,15 +14,9 @@ app.set('view engine', 'ejs');
 // listen for requests
 app.listen(3000);
 
-app.use((req, res, next) => {
-  console.log('\nnew request made:', 'host:', req.hostname, '\b, path:', req.path, '\b, method:', req.method);
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log('\nMiddleware two');
-  next();
-});
+// middleware & static files
+app.use(express.static('public'));
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   const blogs = [
