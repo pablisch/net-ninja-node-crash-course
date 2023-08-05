@@ -9,6 +9,16 @@ app.set('view engine', 'ejs');
 // listen for requests
 app.listen(3000);
 
+app.use((req, res, next) => {
+  console.log('\nnew request made:', 'host:', req.hostname, '\b, path:', req.path, '\b, method:', req.method);
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log('\nMiddleware two');
+  next();
+});
+
 app.get('/', (req, res) => {
   const blogs = [
     {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
