@@ -3,11 +3,11 @@ const Blog = require('../models/blogs');
 
 const router = express.Router();
 
-router.get('/blogs/create', (req, res) => {
+router.get('/create', (req, res) => {
   res.render('create', { title: 'Create a new blog' });
 });
 
-router.delete('/blogs/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   console.log('In DELETE a blog')
   const id = req.params.id;
   console.log('id to delete is', id)
@@ -22,7 +22,7 @@ router.delete('/blogs/:id', (req, res) => {
   })
 })
 
-router.get('/blogs/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   console.log('In GET single blog')
   const id = req.params.id;
   console.log('id to get is', id)
@@ -40,7 +40,7 @@ router.get('/blogs/:id', (req, res) => {
   })
 })
 
-router.get('/blogs', (req, res) => {
+router.get('/', (req, res) => {
   Blog.find().sort({ createdAt: -1 }) // sorts by newest first
     .then(result => {
       res.render('index', { title: 'All blogs', blogs: result });
@@ -50,7 +50,7 @@ router.get('/blogs', (req, res) => {
     });
 });
 
-router.post('/blogs', (req, res) => {
+router.post('/', (req, res) => {
   const newBlog = new Blog(req.body);
 
   newBlog.save()
