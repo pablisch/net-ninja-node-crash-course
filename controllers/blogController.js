@@ -1,63 +1,65 @@
 const Blog = require('../models/blogs');
 
 const blog_index = (req, res) => {
-  Blog.find().sort({ createdAt: -1 }) // sorts by newest first
-    .then(result => {
+  Blog.find()
+    .sort({ createdAt: -1 }) // sorts by newest first
+    .then((result) => {
       res.render('blogs/index', { title: 'All blogs', blogs: result });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
-}
+};
 
 const blog_single = (req, res) => {
-  console.log('In GET single blog')
+  console.log('In GET single blog');
   const id = req.params.id;
-  console.log('id to get is', id)
+  console.log('id to get is', id);
   if (id === ':id') {
-    console.log('I am not finding a single blog')
-    return
+    console.log('I am not finding a single blog');
+    return;
   }
   Blog.findById(id)
-    .then(result => {
-      console.log('I am finding a single blog')
-      res.render('blogs/single-blog', { title: result.title, blog: result })
+    .then((result) => {
+      console.log('I am finding a single blog');
+      res.render('blogs/single-blog', { title: result.title, blog: result });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(404).render('404', { title: 'Blog not found' });
-  })
-}
+    });
+};
 
 const blog_create_get = (req, res) => {
   res.render('blogs/create', { title: 'Create a new blog' });
-}
+};
 
 const blog_create_post = (req, res) => {
   const newBlog = new Blog(req.body);
 
-  newBlog.save()
-    .then(result => {
+  newBlog
+    .save()
+    .then((result) => {
       res.redirect('/blogs');
     })
-    .catch (err => {
+    .catch((err) => {
       console.log(err);
-    } );
-}
+    });
+};
 
 const blog_delete = (req, res) => {
-  console.log('In DELETE a blog')
+  console.log('In DELETE a blog');
   const id = req.params.id;
-  console.log('id to delete is', id)
-  
+  console.log('id to delete is', id);
+
   Blog.findByIdAndDelete(id)
-    .then(result => {
-      res.json({ redirect: '/blogs' })
-      return
+    .then((result) => {
+      res.json({ redirect: '/blogs' });
+      return;
     })
-    .catch(err => {
-      console.log(err)
-  })
-}
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 module.exports = {
   blog_index,
@@ -65,4 +67,4 @@ module.exports = {
   blog_create_get,
   blog_create_post,
   blog_delete,
-}
+};
